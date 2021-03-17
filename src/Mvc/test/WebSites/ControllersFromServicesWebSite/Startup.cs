@@ -25,6 +25,13 @@ namespace ControllersFromServicesWebSite
                 .AddControllersWithViews()
                 .ConfigureApplicationPartManager(manager => manager.ApplicationParts.Clear())
                 .AddApplicationPart(typeof(TimeScheduleController).GetTypeInfo().Assembly)
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.ApplicationParts.Add(new TypesPart(
+                      typeof(AnotherController),
+                      typeof(ComponentFromServicesViewComponent),
+                      typeof(InServicesTagHelper)));
+                })
                 .AddControllersAsServices()
                 .AddViewComponentsAsServices()
                 .AddTagHelpersAsServices();
